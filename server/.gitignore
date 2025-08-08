@@ -1,0 +1,18 @@
+# Node.js
+node_modules/
+
+# Environment variables
+.env
+.env.*     # Optional: ignores all env variant files e.g., .env.local, .env.development
+
+# Logs
+logs/
+*.log
+
+# Build output
+dist/
+build/
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.sx-react-calendar-wrapper {
+    
+    max-width: 100vw;
+    height: 800px;
+    max-height: 90vh;
+  }
+  /* Hide scrollbar for Chrome, Safari and Edge */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* IE and Edge */
+}

@@ -1,0 +1,12 @@
+export{default as AppointmentDetails} from '../components/Appiontments/AppointmentDetails';
+export{default as HomePage} from './HomePage';
+export{default as Register} from './Registration/Register';
+export{default as Login} from './Registration/Login';
+export{default as ProfilePage} from '../components/Registration/ProfilePage';
+export{default as DoctorOverview} from '../components/Doctor/DoctorOverview';
+export{default as PatientOverview} from '../components/Patients/PatientOverview';
+export{default as SideMenu} from './SideMenu';
+export{default as PaymentDashboardDoctor} from '../components/Doctor/PaymentDashboardDoctor';
+export{default as PaymentDashboardPatient} from '../components/Patients/PaymentDashboardPatient';
+export {default as DoctorsAppointment} from "../components/Appiontments/DoctorsAppointment";
+export{default as UpcomingAppointmentDetails} from "../components/Patients/UpcomingAppointmentDetails";
