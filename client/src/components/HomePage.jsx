@@ -40,7 +40,7 @@ const HomePage = () => {
         <div className="md:hidden fixed top-20 right-4 w-64 bg-white shadow-lg rounded-lg border z-50 p-4">
           <ul className="flex flex-col gap-4 text-lg font-semibold text-gray-800">
             <li>
-              <a href="#" onClick={toggleMenu} className="hover:text-blue-500">
+              <a href="#home" onClick={toggleMenu} className="hover:text-blue-500">
                 Home
               </a>
             </li>
@@ -106,7 +106,7 @@ const HomePage = () => {
             <ul className="flex gap-6 ">
               <li>
                 <a
-                  href="#"
+                  href="#home"
                   className="text-2xl font-semibold hover:text-blue-400 hover:text-xl"
                 >
                   Home
@@ -154,7 +154,7 @@ const HomePage = () => {
         </div>
       </div>
       <div className="body mx-12">
-        <div className="home flex  md:mx-20 justify-around items-center my-16 md:my-0 h-fit md:mt-16">
+        <div id= "home"className="home flex  md:mx-20 justify-around items-center my-16 md:my-0 h-fit md:mt-16">
           <div className="left w-full grid justify-items-center ">
             <div className="punchline pb-8">
               <h3 className="text-3xl md:text-5xl font-semibold pb-2">
@@ -165,7 +165,7 @@ const HomePage = () => {
                 Experience Quality Virtual Healthcare at Your Fingertips
               </h4>
               <p className="pt-4 text-xl md:text-2xl text-blue-400 italic">
-                Access expert doctors anytime, anywhere securely and seamlessly.
+                Access expert doctors anytime, anywhere, securely and seamlessly.
               </p>
             </div>
 
@@ -195,9 +195,9 @@ const HomePage = () => {
               <MdOutlineEmail />
             </span>
             <div className="details md:text-xl text-center">
-              <h3 className="font-bold md:text-2xl">Email:</h3>
+              <h3 className="font-bold text-xs md:text-2xl">Email:</h3>
               <p className="font-semibold">
-                <a href="#">onesmuskirimi64@gmail.com</a>
+                <a href="#home">onesmuskirimi64@gmail.com</a>
               </p>
             </div>
           </div>
@@ -207,7 +207,7 @@ const HomePage = () => {
               <MdLocalPhone />{" "}
             </span>
 
-            <div className="details md:text-xl text-center">
+            <div className="details text-xs md:text-xl text-center">
               <h3 className="font-bold md:text-2xl">Phone:</h3>
               <p className="font-semibold">+254 768-444-502</p>
             </div>
@@ -218,7 +218,7 @@ const HomePage = () => {
               <MdLocationOn />
             </span>
 
-            <div className="details md:text-xl text-center">
+            <div className="details text-xs md:text-xl text-center">
               <h3 className="font-bold md:text-2xl">Location:</h3>
               <p className="font-semibold">Nairobi,Kenya</p>
             </div>
@@ -488,7 +488,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <div className="hidden md:flex scroll-button fixed bottom-10  right-2 border p-4 rounded-full text-2xl text-white bg-blue-400 hover:bg-white hover:text-blue-400">
+      <div className="flex scroll-button fixed bottom-10  right-2 border p-4 rounded-full text-2xl text-white bg-blue-400 hover:bg-white hover:text-blue-400">
         <a href="#">
           <MdHome />
         </a>
