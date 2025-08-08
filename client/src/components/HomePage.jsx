@@ -188,7 +188,7 @@ const HomePage = () => {
             <img src={Doc} alt="Doctors animination" className="h-96" />
           </div>
         </div>
-        <div className="contact-info flex gap-2 md:gap-4 justify-between md:justify-evenly border md:mx-16 -mx-8 py-6 -mt-4 rounded-md backdrop-blur-sm">
+        <div className="contact-info space-y-2 md:flex gap-2 md:gap-4 md:justify-evenly border md:mx-16 -mx-8 py-6 -mt-4 rounded-md backdrop-blur-sm">
           <div className="email grid justify-items-center md:flex items-center md:gap-4 text-sm px-1">
             <span className="p-2 bg-blue-400 font-semibold md:text-3xl text-white rounded-full w-fit text-center">
               {" "}
