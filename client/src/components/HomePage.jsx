@@ -188,14 +188,13 @@ const HomePage = () => {
             <img src={Doc} alt="Doctors animination" className="h-96" />
           </div>
         </div>
-        <div className="contact-info flex gap-4 md:justify-evenly border md:mx-16 -mx-8 py-6 -mt-4 rounded-md backdrop-blur-sm">
-          <div className="email grid justify-items-center md:flex items-center  md:gap-4 text-sm px-1">
+        <div className="contact-info flex gap-2 md:gap-4 md:justify-evenly border md:mx-16 -mx-8 py-6 -mt-4 rounded-md backdrop-blur-sm">
+          <div className="email grid justify-items-center md:flex items-center md:gap-4 text-sm px-1">
             <span className="p-2 bg-blue-400 font-semibold md:text-3xl text-white rounded-full w-fit text-center">
               {" "}
               <MdOutlineEmail />
             </span>
             <div className="details md:text-xl text-center">
-              <h3 className="font-bold text-xs md:text-2xl">Email:</h3>
               <p className="font-semibold">
                 <a href="#home">onesmuskirimi64@gmail.com</a>
               </p>
@@ -208,7 +207,6 @@ const HomePage = () => {
             </span>
 
             <div className="details text-xs md:text-xl text-center">
-              <h3 className="font-bold md:text-2xl">Phone:</h3>
               <p className="font-semibold">+254 768-444-502</p>
             </div>
           </div>
@@ -219,7 +217,6 @@ const HomePage = () => {
             </span>
 
             <div className="details text-xs md:text-xl text-center">
-              <h3 className="font-bold md:text-2xl">Location:</h3>
               <p className="font-semibold">Nairobi,Kenya</p>
             </div>
           </div>
