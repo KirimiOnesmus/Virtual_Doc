@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 import { FaSignInAlt } from "react-icons/fa";
 import Doc from "../assests/homepage.png";
 import {
@@ -14,10 +14,12 @@ import mentalHealth from "../assests/mentals-services.png";
 import chronicDisease from "../assests/chronic-disease-management.png";
 import diagnosis from "../assests/diagnosis.png";
 import prescription from "../assests/prescription.png";
-
+import emailjs from '@emailjs/browser';
 import logo from "../assests/logo.png";
+  import { toast } from 'react-toastify';
 
 const HomePage = () => {
+  const  form = useRef();
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const loginpage = () => {
@@ -26,6 +28,24 @@ const HomePage = () => {
   const Register = () => {
     window.location.href = "/register";
   };
+  const sendEmail=(e)=>{
+    e.preventDefault();
+    emailjs
+    .sendForm("service_sl2nob6","template_19nha2e",form.current,{
+      publicKey:"Bi8LuTNL3ymwRxWKO",
+    })
+    .then(
+    ()=>{
+      toast.success("Message sent successfully!");
+    },
+    (error)=>{
+      toast.error("Failed to send message. Try again later !");
+      console.log(error.text);
+    },
+    );
+  }
+
+
   return (
     <div className=" relative ">
       <div className="md:hidden fixed top-4 right-4 z-50">
@@ -196,7 +216,7 @@ const HomePage = () => {
             </span>
             <div className="details md:text-xl text-center">
               <p className="font-semibold">
-                <a href="#home">onesmuskirimi64@gmail.com</a>
+                <p>virtualdoc254@gmail.com</p>
               </p>
             </div>
           </div>
@@ -376,13 +396,15 @@ const HomePage = () => {
               </p>
             </div>
             <div className="bg-white p-6 shadow-lg rounded-xl w-full md:w-1/2">
-              <form action="" className="space-y-6">
+              <form ref={form} onSubmit={sendEmail} className="space-y-6">
                 <div className="flex flex-col space-y-2">
                   <label htmlFor="name" className="font-semibold">
                     Name:
                   </label>
                   <input
                     type="text"
+                    name="name"
+                    id="name"
                     placeholder="John Doe"
                     className="bg-gray-100 outline-none rounded-lg p-2"
                   />
@@ -394,7 +416,7 @@ const HomePage = () => {
                   <input
                     type="email"
                     name="email"
-                    id=""
+                    id="email"
                     placeholder="johndoe@gmail.com"
                     className="bg-gray-100 outline-none rounded-lg p-2"
                   />
@@ -405,13 +427,14 @@ const HomePage = () => {
                   </label>
                   <textarea
                     name="message"
-                    id=""
+                    id="message"
                     placeholder="Your message"
                     className="bg-gray-100 outline-none rounded-lg p-2"
                   ></textarea>
                 </div>
                 <div>
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold resize-none hover:text-blue-500 hover:bg-white hover:border border-blue-500">
+                  <button  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded-lg font-semibold resize-none hover:text-blue-500 hover:bg-white hover:border border-blue-500">
                     Send Message
                   </button>
                 </div>
