@@ -12,10 +12,16 @@ const db = require("./config/db");
 const app = express();
 const server = http.createServer(app);
 
+// Updated CORS configuration for production
+const allowedOrigins =[
+  "http://localhost:3000",
+  "https://virtual-doc-six.vercel.app",
+]
+
 // Setup socket.io with CORS
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: allowedOrigins,
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -36,7 +42,10 @@ io.use((socket, next) => {
 });
 
 // Setup middleware
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(cors({ 
+  origin: allowedOrigins,
+  credentials: true 
+  }));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
@@ -81,6 +90,22 @@ app.get("/", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+  // Database test endpoint
+app.get("/api/test", async (req, res) => {
+  try {
+    const [rows] = await db.query("SELECT 1 as test");
+    res.json({ 
+      message: "Database connected successfully!", 
+      test: rows[0].test 
+    });
+  } catch (err) {
+    console.error('Database test failed:', err);
+    res.status(500).json({ 
+      error: "Database connection failed", 
+      details: err.message 
+    });
+  }
+});
 
 // Socket events
 io.on("connection", async (socket) => {
@@ -101,8 +126,12 @@ io.on("connection", async (socket) => {
   } catch (err) {
     console.error("Error setting user online:", err);
   }
+
   //joining  the meet
-  socket.on("join-room", (roomId) => {});
+  socket.on("join-room", (roomId) => {
+    socket.join(roomId);
+    console.log(`User ${userId} joined room ${roomId}`);
+  });
 
   socket.on("sendMessage", async (msg) => {
     const { appointment_id, receiver_id, text, attachment_url } = msg;
