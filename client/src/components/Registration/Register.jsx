@@ -14,7 +14,7 @@ const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
+    // phone: "",
     password: "",
     specialization: "",
   });
@@ -30,38 +30,47 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setError(null);
 
-    const dataToSend = {
-      name: formData.name,
-      email: formData.email,
-      // phone: formData.phone,
-      password: formData.password,
-      role: "patient",
-    };
-    try {
-      const response = await api.post("/auth/register", dataToSend);
-
-      const data = await response.json();
-      if (response.ok) {
-        console.log("User Registered Successfully!! ", data);
-        setTimeout(() => {
-          navigate("/login");
-        }, 2000);
-      } else {
-        setError(data.message || "Registration Failed !");
-      }
-    } catch (error) {
-      console.log("Oops Failed:", error);
-      setError("Something went wrong, please try again later!!");
-    } finally {
-      setLoading(false);
-    }
+  const dataToSend = {
+    name: formData.name,
+    email: formData.email,
+    password: formData.password,
+    role: "patient",
   };
 
+  try {
+ 
+    const response = await api.post("/auth/register", dataToSend);
+    
+
+    console.log("User Registered Successfully!!", response.data);
+    
+   
+    setTimeout(() => {
+      navigate("/login");
+    }, 2000);
+    
+  } catch (error) {
+    console.log("Registration failed:", error);
+    
+    if (error.response) {
+      
+      setError(error.response.data?.message || "Registration Failed!");
+    } else if (error.request) {
+      
+      setError("Unable to connect to server. Please try again.");
+    } else {
+      
+      setError("Something went wrong, please try again later!");
+    }
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
       <div className="w-full max-w-6xl md:flex md:justify-between border rounded-xl shadow-lg bg-white overflow-hidden">
@@ -114,18 +123,6 @@ const Register = () => {
                 className="w-full p-2 border rounded-lg bg-slate-100 font-semibold text-lg outline-none focus:ring-1 focus:ring-blue-400"
               />
             </div>
-            {/* 
-            <div>
-              <label className="block text-lg font-bold mb-1">Phone Number:</label>
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-                placeholder="+254712345678"
-                className="w-full p-2 border rounded-lg bg-slate-100 font-semibold text-lg outline-none focus:ring-1 focus:ring-blue-400"
-              />
-            </div> */}
 
             <div className="relative">
               <label className="block text-lg font-bold mb-1">Password:</label>
@@ -150,9 +147,10 @@ const Register = () => {
 
             <button
               type="submit"
+              disabled={loading}
               className="w-full bg-blue-500 text-white py-2 rounded-lg font-bold text-lg hover:bg-white hover:text-blue-500 hover:border border-blue-500 transition duration-200"
             >
-              Register
+              {loading ? "Registering..." : "Register"}
             </button>
           </form>
 
