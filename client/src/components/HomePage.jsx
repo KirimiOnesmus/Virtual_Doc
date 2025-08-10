@@ -125,8 +125,7 @@ const HomePage = () => {
           <div className="links">
             <ul className="flex gap-6 ">
               <li>
-                <a
-                  href="#home"
+                <a href="#home"
                   className="text-2xl font-semibold hover:text-blue-400 hover:text-xl"
                 >
                   Home
