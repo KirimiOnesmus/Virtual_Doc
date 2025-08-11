@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import { MdPassword } from "react-icons/md";
 import avatar from "../../assests/profile-photo.png";
-import axios from "axios";
+import api from "../../config/api";
 
 const ProfilePage = () => {
   const { userId } = useParams();
@@ -48,7 +48,7 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/api/users/profile`, {
+        const res = await api.get(`/users/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -201,7 +201,7 @@ const ProfilePage = () => {
         if (key !== "avatar") form.append(key, value);
       });
 
-      await axios.put("http://localhost:8080/api/users/profile", form, {
+      await api.put("/users/profile", form, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
