@@ -129,66 +129,7 @@ const ProfilePage = () => {
     }));
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const {
-  //       phonenumber,
-  //       gender,
-  //       specialty,
-  //       license_number,
-  //       years_of_experience,
-  //       affiliation,
-  //       bio,
-  //       address,
-  //       county,
-  //       date_of_birth,
-  //       insurance,
-  //       policy_number,
-  //       allergies,
-  //       blood_group,
-  //       current_medication,
-  //       existing_condition,
-  //       emergency_name,
-  //       emergency_relationship,
-  //       emergency_contact,
-  //     } = formData;
 
-  //     await axios.put(
-  //       "http://localhost:8080/api/users/profile",
-  //       {
-  //         phonenumber,
-  //         gender,
-  //         specialty,
-  //         license_number,
-  //         years_of_experience,
-  //         affiliation,
-  //         county,
-  //         address,
-  //         bio,
-  //         date_of_birth,
-  //         insurance,
-  //         policy_number,
-  //         allergies,
-  //         blood_group,
-  //         current_medication,
-  //         existing_condition,
-  //         emergency_name,
-  //         emergency_relationship,
-  //         emergency_contact,
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-  //     alert("Profile updated successfully!");
-  //   } catch (error) {
-  //     console.error("Profile update failed", error);
-  //     alert("Profile update failed");
-  //   }
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
 

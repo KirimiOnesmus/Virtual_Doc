@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import SideMenu from "../components/SideMenu";
-import axios from "axios";
+
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import api from "../../config/api";
 
 const Dashboard = () => {
   const [userRole, setUserRole] = useState(null);
@@ -25,11 +26,11 @@ const Dashboard = () => {
       setLoading(false);
 
       console.log("Token before request:", token);
-      axios.get(`http://localhost:8080/api/users/${storedUserId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
+      api.get(`/users/${storedUserId}`, {
+          // headers: {
+          //   Authorization: `Bearer ${token}`,
             
-          },
+          // },
           
         })
         .then((response) => {
