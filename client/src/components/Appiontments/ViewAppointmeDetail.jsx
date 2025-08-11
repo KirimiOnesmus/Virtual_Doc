@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 import { IoCloseOutline, IoPrintOutline } from "react-icons/io5";
-import axios from "axios";
+import api from "../../config/api";
 
 const ViewAppointmeDetail = ({ appointmentId, onClose }) => {
   const [appointment, setAppointment] = useState(null);
@@ -10,15 +10,8 @@ const ViewAppointmeDetail = ({ appointmentId, onClose }) => {
   useEffect(() => {
     const fetchAppointment = async () => {
       try {
-        const token = sessionStorage.getItem("token");
-        const res = await axios.get(
-          `http://localhost:8080/api/appointments/details/${appointmentId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const res = await api.get(
+          `/appointments/details/${appointmentId}` );
         setAppointment(res.data);
       } catch (error) {
         console.error("Failed to fetch appointment details", error);
@@ -33,8 +26,8 @@ const ViewAppointmeDetail = ({ appointmentId, onClose }) => {
   const handleDownloadPDF = async () => {
     try {
       const token = sessionStorage.getItem("token");
-      const response = await axios.get(
-        `http://localhost:8080/api/appointments/details/${appointmentId}?download=pdf`,
+      const response = await api.get(
+        `/appointments/details/${appointmentId}?download=pdf`,
         {
           headers: { Authorization: `Bearer ${token}` },
           responseType: "blob",

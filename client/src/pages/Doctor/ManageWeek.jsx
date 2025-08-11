@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../../config/api";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
@@ -60,15 +60,7 @@ const ManageWeek = () => {
     }));
 
     try {
-      await axios.post(
-        "http://localhost:8080/api/schedule/save",
-        { schedule: weeklyData },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await api.post("/schedule/save", { schedule: weeklyData });
       alert("Weekly availability saved!");
       navigate("/dashboard/schedule");
     } catch (error) {

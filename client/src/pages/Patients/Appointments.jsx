@@ -1,10 +1,8 @@
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../../config/api";
 import { MdOutlineFreeCancellation } from "react-icons/md";
 import { IoEyeOutline } from "react-icons/io5";
-
-import avatar from "../../assests/doctor1.jpg";
 import ViewAppointmeDetail from "../../components/Appiontments/ViewAppointmeDetail";
 import UpcomingAppointmentDetails from "../../components/Patients/UpcomingAppointmentDetails";
 
@@ -23,7 +21,7 @@ const Appointments = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const role = sessionStorage.getItem("role");
-  const BASE_URL = "http://localhost:8080";
+  const BASE_URL = "https://virtualdoc-server.onrender.com";
   const itemsPerPage = 6;
 
   useEffect(() => {
@@ -32,7 +30,7 @@ const Appointments = () => {
       const token = sessionStorage.getItem("token");
 
       try {
-        const res = await axios.get(`${BASE_URL}/api/appointments`, {
+        const res = await api.get(`/appointments`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -86,8 +84,8 @@ const Appointments = () => {
       return;
 
     try {
-      await axios.patch(
-        `${BASE_URL}/api/appointments/${id}/cancel`,
+      await api.patch(
+        `/appointments/${id}/cancel`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },

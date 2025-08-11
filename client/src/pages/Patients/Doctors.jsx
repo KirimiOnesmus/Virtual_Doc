@@ -4,7 +4,7 @@ import { CgDetailsMore } from "react-icons/cg";
 import "react-datepicker/dist/react-datepicker.css";
 import ScheduleAppointment from "../../components/Appiontments/ScheduleAppointment";
 import DoctorDetails from "../../components/Doctor/DoctorDetails";
-import axios from "axios";
+import api from "../../config/api";
 import { useSearchParams } from "react-router-dom";
 
 const Doctors = () => {
@@ -14,12 +14,12 @@ const Doctors = () => {
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [bookAppointment, setBookAppointment] = useState(null);
   const [searchParams] = useSearchParams();
-  const BASE_URL = "http://localhost:8080";
+  const BASE_URL = "https://virtualdoc-server.onrender.com";
 
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/doctors");
+        const res = await api.get("/doctors");
         setDoctors(res.data);
       } catch (error) {
         console.error("Failed to fetch the doctors", error);

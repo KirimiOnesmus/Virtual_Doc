@@ -25,7 +25,7 @@ const PatientDetails = () => {
 
     const fetchPrescriptions = async () => {
       try {
-        const res = await api.get(`http://localhost:8080/api/prescriptions/patient/${id}`,)
+        const res = await api.get(`/prescriptions/patient/${id}`,)
         setPrescriptions(res.data);
       } catch (error) {
         console.error("Failed to fetch prescriptions:", error);

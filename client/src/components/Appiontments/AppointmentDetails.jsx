@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { IoCloseOutline } from "react-icons/io5";
-import axios from "axios";
+import api from "../../config/api";
 
 const AppointmentDetails = ({ event, onClose }) => {
   const [activeTab, setActiveTab] = useState("prescriptions");
@@ -29,15 +29,7 @@ const AppointmentDetails = ({ event, onClose }) => {
     const fetchAppointmets = async () => {
       if (!patientId) return;
       try {
-        const res = await axios.get(
-          `
-          http://localhost:8080/api/appointments/patient/${patientId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-            },
-          }
-        );
+        const res = await api.get(`/appointments/patient/${patientId}`);
         setTimeline(res.data);
         console.log("Overall appointment:", res.data);
       } catch (error) {
@@ -61,8 +53,7 @@ const AppointmentDetails = ({ event, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(
-        "http://localhost:8080/api/treatment/add",
+      await api.post("/treatment/add",
         {
           appointment_id: appointmentId,
           doctor_id: doctorId,
@@ -94,8 +85,8 @@ const AppointmentDetails = ({ event, onClose }) => {
   useEffect(() => {
     const fetchDocs = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:8080/api/prescriptions/${appointmentId}`
+        const res = await api.get(
+          `/prescriptions/${appointmentId}`
         );
         setDocuments(res.data);
       } catch (error) {
@@ -107,11 +98,8 @@ const AppointmentDetails = ({ event, onClose }) => {
 
   const handleDownload = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/prescriptions/${appointmentId}`,
-        {
-          method: "GET",
-        }
+      const response = await api.get(
+        `/prescriptions/${appointmentId}`
       );
 
       if (!response.ok) throw new Error("Failed to download");

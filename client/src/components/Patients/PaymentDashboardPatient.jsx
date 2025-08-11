@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CiCreditCard1 } from "react-icons/ci";
 import { TbDeviceMobileDollar } from "react-icons/tb";
 import avatar from "../../assests/doctor2.png";
-import axios from "axios";
+import api from "../../config/api";
 
 const PaymentDashboardPatient = () => {
   const [activeMethod, setActiveMethod] = useState("mobile");
@@ -18,12 +18,7 @@ const PaymentDashboardPatient = () => {
 
     const pendingPayments = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:8080/api/payments/patient/${userId}/pendingbills`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const res = await api.get(`/payments/patient/${userId}/pendingbills`);
         setPending(res.data);
       } catch (error) {
         console.log("Error fetching pending payments");
@@ -32,12 +27,7 @@ const PaymentDashboardPatient = () => {
 
     const fetchPatientPayments = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:8080/api/payments/patient/${userId}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const res = await api.get(`/payments/patient/${userId}`);
         setPayments(res.data);
       } catch (error) {
         console.log("Error fetching past payments", error);
@@ -55,18 +45,13 @@ const PaymentDashboardPatient = () => {
       return;
     }
     try {
-      const response = await axios.post(
+      const response = await api.post(
         "", // replace with your endpoint
         {
           phone,
           provider,
           appointmentId: selectedAppointment?.appointmentId,
           amount: selectedAppointment?.amount,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
         }
       );
       alert("Payment initiated. Please check your phone.");

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import { FaStar } from "react-icons/fa";
 import { FcCalendar } from "react-icons/fc";
-import axios from "axios";
+import api from "../../config/api";
 
 const DoctorDetails = ({ doctor, onClose }) => {
   const [selectedTab, setSelectedTab] = useState("Overview");
@@ -14,7 +14,7 @@ const DoctorDetails = ({ doctor, onClose }) => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/api/reviews/doctor/${doctor.id}`);
+        const res = await api.get(`/reviews/doctor/${doctor.id}`);
         setReviews(res.data);
       } catch (error) {
         console.log("Failed to fetch reviews:", error);
@@ -23,7 +23,7 @@ const DoctorDetails = ({ doctor, onClose }) => {
     };
     const fetchSchedule = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/api/schedule/weekly/${doctor.id}`);
+        const res = await api.get(`/schedule/weekly/${doctor.id}`);
         setWeeklySchedule(res.data);
       } catch (error) {
         console.log("Error fetching schedule:", error);
@@ -47,11 +47,7 @@ const DoctorDetails = ({ doctor, onClose }) => {
 
     try {
       const token = sessionStorage.getItem("token");
-      await axios.post("http://localhost:8080/api/reviews", newReview, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await api.post("/reviews", newReview);
       setReviews([newReview, ...reviews]);
       setReviewText("");
       setRating(0);

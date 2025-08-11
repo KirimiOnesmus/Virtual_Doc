@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import { IoCloseOutline } from "react-icons/io5";
-import axios from "axios";
+import api from "../../config/api";
 
 const ScheduleAppointment = ({ onClose, doctor }) => {
   const [department, setDepartment] = useState(doctor?.specialty || "");
@@ -9,14 +9,11 @@ const ScheduleAppointment = ({ onClose, doctor }) => {
   const [timeSlot, setTimeSlot] = useState("");
   const [symptoms, setSymptoms] = useState("");
   const [consultationType, setConsultationType] = useState("");
-  const token = sessionStorage.getItem("token");
 
   useEffect(() => {
     const fetchSlots = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8080/api/schedule/available/${doctor.id}`
-        );
+        const response = await api.get(`/schedule/available/${doctor.id}`);
         const sortedSlots = response.data
           .filter((slot) => new Date(slot.start_time) > new Date())
           .sort((a, b) => new Date(a.start_time) - new Date(b.start_time));
@@ -44,12 +41,7 @@ const ScheduleAppointment = ({ onClose, doctor }) => {
     };
 
     try {
-      await axios.post("http://localhost:8080/api/appointments", payload, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      });
+      await api.post("/appointments", payload);
 
       alert("Appointment Booked Successfully!");
       onClose();

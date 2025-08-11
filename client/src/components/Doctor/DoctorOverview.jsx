@@ -1,8 +1,8 @@
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Card from "../Card";
 import { useOutletContext } from "react-router-dom";
+import api from "../../config/api";
 
 const DoctorOverview = () => {
   const token = sessionStorage.getItem("token");
@@ -13,14 +13,7 @@ const DoctorOverview = () => {
   useEffect(() => {
     const fetchDashboardStats = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:8080/api/doctors/${userData.id}/stats`,
-          {
-            headers: {
-              Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-            },
-          }
-        );
+        const res = await api.get(`/doctors/${userData.id}/stats`);
         setStatsData(res.data);
       } catch (error) {
         console.error("Error fetching dashboard stats:", error);
@@ -30,14 +23,7 @@ const DoctorOverview = () => {
     const fetchAppointments = async () => {
       try {
         const doctorId = userData.id;
-        const res = await axios.get(
-          `http://localhost:8080/api/doctors/${doctorId}/appointments/today`,
-          {
-            headers: {
-              Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-            },
-          }
-        );
+        const res = await api.get(`/doctors/${doctorId}/appointments/today`);
         setAppointments(res.data);
       } catch (error) {
         console.error("Error fetching appointments:", error);

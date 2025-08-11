@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Outlet, NavLink } from "react-router-dom";
-import axios from "axios";
+import { NavLink } from "react-router-dom";
+import api from "../../config/api";
 
 const Schedule = () => {
   const [weeklySchedule, setWeeklySchedule] = useState([]);
@@ -13,7 +13,7 @@ const Schedule = () => {
         return;
       }
 
-      const res = await axios.get("http://localhost:8080/api/schedule/weekly", {
+      const res = await api.get("/schedule/weekly", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

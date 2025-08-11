@@ -3,7 +3,7 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import axios from "axios";
+import api from "../../config/api";
 
 import { AppointmentDetails } from "../../components";
 import { DoctorsAppointment } from "../../components";
@@ -19,18 +19,9 @@ const Calendar = () => {
 
       try {
 
-        const  doctorRes= await axios.get(`http://localhost:8080/api/doctors/by-user/${userId}`,{
-           headers: {
-          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-        },
-        });
+        const  doctorRes= await api.get(`/doctors/by-user/${userId}`);
         const doctorId = doctorRes.data.doctor_id;
-        const res = await axios.get(`http://localhost:8080/api/appointments/doctor/${doctorId}`, {
-          headers: {
-
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-          },
-        });
+        const res = await api.get(`/appointments/doctor/${doctorId}`);
         console.log("Full Axios response:", res);
         console.log("Full response data:", res.data)
       if (!Array.isArray(res.data)) {
