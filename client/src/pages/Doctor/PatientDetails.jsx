@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { MdOutlineDownload } from "react-icons/md";
-import axios from "axios";
+
+import api from "../../config/api";
 
 const PatientDetails = () => {
   const { id } = useParams();
@@ -13,11 +14,7 @@ const PatientDetails = () => {
   useEffect(() => {
     const fetchPatientDetails = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/api/patients/${id}`, {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-          },
-        });
+        const res = await api.get(`/patients/${id}`)
         setPatient(res.data);
       } catch (error) {
         console.error("Failed to fetch patient details:", error);
@@ -28,11 +25,7 @@ const PatientDetails = () => {
 
     const fetchPrescriptions = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/api/prescriptions/patient/${id}`, {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-          },
-        });
+        const res = await api.get(`http://localhost:8080/api/prescriptions/patient/${id}`,)
         setPrescriptions(res.data);
       } catch (error) {
         console.error("Failed to fetch prescriptions:", error);

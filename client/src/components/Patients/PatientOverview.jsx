@@ -5,9 +5,9 @@ import { BsChatDots } from "react-icons/bs";
 import profile from "../../assests/doctor3.png";
 import { useNavigate } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
-import axios from "axios";
 import { specialtyIcons, fallbackIcons } from "../utils/iconMap";
 import DoctorDetails from "../Doctor/DoctorDetails";
+import api from "../../config/api";
 
 const PatientOverview = () => {
   const navigate = useNavigate();
@@ -17,17 +17,13 @@ const PatientOverview = () => {
   const [doctors, setDoctors] = useState([]);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const assignedIconsRef = useRef({});
-  const BASE_URL = "http://localhost:8080";
+  const BASE_URL = "https://virtualdoc-server.onrender.com";
 
   useEffect(() => {
     const fetchAppointments = async () => {
-      const token = sessionStorage.getItem("token");
       try {
-        const res = await axios.get(
-          `http://localhost:8080/api/appointments/patients/${userData.id}/upcoming-appointment`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
+        const res = await api.get(
+          `/appointments/patients/${userData.id}/upcoming-appointment`
         );
         setUpcomingAppointment(res.data);
         console.log(res.data);
@@ -45,9 +41,7 @@ const PatientOverview = () => {
     //fetching specialties from the backend
     const fetchSpecialties = async () => {
       try {
-        const res = await axios.get(
-          "http://localhost:8080/api/doctors/specialties"
-        );
+        const res = await api.get("/doctors/specialties");
         setCategories(res.data.map((s) => s.trim()));
       } catch (error) {
         console.log("Failed to fetch specialties:", error);
@@ -58,7 +52,7 @@ const PatientOverview = () => {
     //fetching doctors
     const fetchDoctors = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/doctors");
+        const res = await api.get("/doctors");
         setDoctors(res.data);
       } catch (error) {
         console.log("Failed to fetch doctors", error);

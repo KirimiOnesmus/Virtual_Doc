@@ -3,7 +3,7 @@ import SideMenu from "../components/SideMenu";
 
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-import api from "../../config/api";
+import api from "../config/api";
 
 const Dashboard = () => {
   const [userRole, setUserRole] = useState(null);
