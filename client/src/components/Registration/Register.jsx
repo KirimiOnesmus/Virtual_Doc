@@ -4,7 +4,6 @@ import Doctor from "../../assests/doctor3.png";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { MdHome } from "react-icons/md";
 import {toast} from 'react-toastify'
-
 import api from "../../config/api";
 
 const Register = () => {
