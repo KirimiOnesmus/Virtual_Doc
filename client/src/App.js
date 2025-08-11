@@ -18,6 +18,8 @@ import {
   ManageWeek,
   Schedule,
 } from "./pages/index";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
@@ -46,6 +48,7 @@ function App() {
           <Route path="DoctorRegistration" element={<DoctorRegistration />} />
         </Route>
       </Routes>
+       <ToastContainer />
     </div>
   );
 }
