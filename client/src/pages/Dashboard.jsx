@@ -26,13 +26,7 @@ const Dashboard = () => {
       setLoading(false);
 
       console.log("Token before request:", token);
-      api.get(`/users/${storedUserId}`, {
-          // headers: {
-          //   Authorization: `Bearer ${token}`,
-            
-          // },
-          
-        })
+      api.get(`/users/${storedUserId}`)
         .then((response) => {
           console.log("Token used in request:", token);
           const data = response.data.user || response.data;
