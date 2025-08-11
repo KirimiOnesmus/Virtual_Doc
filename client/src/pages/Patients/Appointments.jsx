@@ -3,8 +3,7 @@ import React, { useState, useEffect } from "react";
 import api from "../../config/api";
 import { MdOutlineFreeCancellation } from "react-icons/md";
 import { IoEyeOutline } from "react-icons/io5";
-
-import avatar from "../../assests/doctor1.jpg";
+import { useOutletContext } from "react-router-dom";
 import ViewAppointmeDetail from "../../components/Appiontments/ViewAppointmeDetail";
 import UpcomingAppointmentDetails from "../../components/Patients/UpcomingAppointmentDetails";
 
@@ -25,14 +24,14 @@ const Appointments = () => {
   const role = sessionStorage.getItem("role");
   const BASE_URL = "https://virtualdoc-server.onrender.com/api";
   const itemsPerPage = 6;
-
+const { userData } = useOutletContext();
   useEffect(() => {
     const fetchAppointments = async () => {
       setLoading(true);
       const token = sessionStorage.getItem("token");
 
       try {
-        const res = await api.get(`/appointments`, {
+        const res = await api.get(`/appointments/patients/${userData.id}/upcoming-appointment`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
