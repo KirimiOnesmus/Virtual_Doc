@@ -113,7 +113,7 @@ const Login = () => {
               disabled={loading}
               className="w-full bg-blue-500 text-white py-2 rounded-lg font-bold text-lg hover:bg-white hover:text-blue-500 hover:border border-blue-500 transition duration-200"
             >
-              {loading?"Logging..." : "Log In"}
+              {loading ? "Logging..." : "Log In"}
             </button>
           </form>
 
