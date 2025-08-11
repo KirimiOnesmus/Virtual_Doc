@@ -104,7 +104,7 @@ const PatientOverview = () => {
         </button>
       </div>
       {upcomingAppointment ? (
-        <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <div className="mb-6 flex flex-col gap-2">
           <div className="bg-blue-50 rounded-xl p-4 flex justify-between items-center shadow-sm">
             <div className="flex items-center gap-4">
               <img

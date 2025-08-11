@@ -14,7 +14,7 @@ const Doctors = () => {
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [bookAppointment, setBookAppointment] = useState(null);
   const [searchParams] = useSearchParams();
-  const BASE_URL = "https://virtualdoc-server.onrender.com";
+  const BASE_URL = "https://virtualdoc-server.onrender.com"; 
 
   useEffect(() => {
     const fetchDoctors = async () => {

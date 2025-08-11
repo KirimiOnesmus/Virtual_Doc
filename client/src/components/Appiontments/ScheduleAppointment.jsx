@@ -9,6 +9,7 @@ const ScheduleAppointment = ({ onClose, doctor }) => {
   const [timeSlot, setTimeSlot] = useState("");
   const [symptoms, setSymptoms] = useState("");
   const [consultationType, setConsultationType] = useState("");
+    const BASE_URL = "https://virtualdoc-server.onrender.com";
 
   useEffect(() => {
     const fetchSlots = async () => {
@@ -77,7 +78,7 @@ const ScheduleAppointment = ({ onClose, doctor }) => {
         {/* Doctor Card */}
         <div className="flex items-center gap-4 p-4 bg-white rounded-lg shadow-sm mb-6">
           <img
-            src={`http://localhost:8080${doctor.avatar}`}
+            src={`${BASE_URL}${doctor.avatar}`}
             alt="Doctor Avatar"
             className="rounded-full w-16 h-16 sm:w-24 sm:h-24 object-cover"
           />

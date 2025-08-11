@@ -10,7 +10,7 @@ const DoctorDetails = ({ doctor, onClose }) => {
   const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
-
+  const BASE_URL = "https://virtualdoc-server.onrender.com/api"
   useEffect(() => {
     const fetchReviews = async () => {
       try {
@@ -83,7 +83,7 @@ const DoctorDetails = ({ doctor, onClose }) => {
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-6">
             <div className="w-24 h-24 sm:w-32 sm:h-32 bg-blue-500 rounded-full overflow-hidden">
               <img
-                src={`http://localhost:8080${doctor.avatar}`}
+                src={`${BASE_URL} ${doctor.avatar}`}
                 alt="Doctor"
                 className="w-full h-full object-cover"
               />

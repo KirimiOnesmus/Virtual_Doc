@@ -2,6 +2,7 @@ import React from "react";
 import { IoClose } from "react-icons/io5";
 
 const UpcomingAppointmentDetails = ({ appointment, onClose }) => {
+  const BASE_URL = "https://virtualdoc-server.onrender.com";
   if (!appointment) return null;
 
   return (
@@ -23,7 +24,7 @@ const UpcomingAppointmentDetails = ({ appointment, onClose }) => {
         {/* Doctor Info */}
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center border-b pb-4 mb-6">
           <img
-            src={`http://localhost:8080${appointment.doctor?.avatar}`}
+            src={`${BASE_URL} ${appointment.doctor?.avatar}`}
             alt="Doctor"
             className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border border-blue-200 shadow-sm"
           />

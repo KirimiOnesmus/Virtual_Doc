@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import api from "../../config/api";
 import { MdOutlineFreeCancellation } from "react-icons/md";
 import { IoEyeOutline } from "react-icons/io5";
+
+import avatar from "../../assests/doctor1.jpg";
 import ViewAppointmeDetail from "../../components/Appiontments/ViewAppointmeDetail";
 import UpcomingAppointmentDetails from "../../components/Patients/UpcomingAppointmentDetails";
 
@@ -21,7 +23,7 @@ const Appointments = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const role = sessionStorage.getItem("role");
-  const BASE_URL = "https://virtualdoc-server.onrender.com";
+  const BASE_URL = "https://virtualdoc-server.onrender.com/api";
   const itemsPerPage = 6;
 
   useEffect(() => {
@@ -84,12 +86,8 @@ const Appointments = () => {
       return;
 
     try {
-      await api.patch(
-        `/appointments/${id}/cancel`,
+      await api.patch(`/appointments/${id}/cancel`,
         {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
       );
 
       setAppointments((prev) => ({
