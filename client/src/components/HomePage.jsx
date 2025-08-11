@@ -37,6 +37,7 @@ const HomePage = () => {
     .then(
     ()=>{
       toast.success("Message sent successfully!");
+       form.current.reset();
     },
     (error)=>{
       toast.error("Failed to send message. Try again later !");
