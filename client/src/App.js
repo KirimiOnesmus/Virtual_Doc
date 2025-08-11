@@ -47,8 +47,18 @@ function App() {
           <Route path="payment" element={<PaymentPage />} />
           <Route path="DoctorRegistration" element={<DoctorRegistration />} />
         </Route>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </Routes>
-       <ToastContainer />
     </div>
   );
 }
