@@ -36,9 +36,33 @@ const handleSubmit = async (e) => {
   setLoading(true);
   setError(null);
 
+if (!formData.name.trim()) {
+      toast.error("Please enter your full name");
+      setLoading(false);
+      return;
+    }
+
+    if (!formData.email.trim()) {
+      toast.error("Please enter your email address");
+      setLoading(false);
+      return;
+    }
+
+    if (!formData.password.trim()) {
+      toast.error("Please enter a password");
+      setLoading(false);
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      toast.error("Password must be at least 6 characters long");
+      setLoading(false);
+      return;
+    }
+
   const dataToSend = {
-    name: formData.name,
-    email: formData.email,
+    name: formData.name.trim(),
+    email: formData.email.trim().toLowerCase(),
     password: formData.password,
     role: "patient",
   };
@@ -48,27 +72,51 @@ const handleSubmit = async (e) => {
     const response = await api.post("/auth/register", dataToSend);
     
 
-    // console.log("User Registered Successfully!!", response.data);
-    toast.success("User Registered Successfully! Redirecting....");
+    console.log("User Registered Successfully!!", response);
+    toast.success("User Registered Successfully! Redirecting....",{
+      position:"top-right",
+      autoClose:1750,
+    });
    
     setTimeout(() => {
       navigate("/login");
     }, 2000);
     
   } catch (error) {
-    // console.log("Registration failed:", error);
 
-    toast.error("Registraion Failed ! Try Again Later.");
-    if (error.response) {
+     console.error("Registration error:", error);
       
-      setError(error.response.data?.message || "Registration Failed!");
-    } else if (error.request) {
+      let errorMessage = "Registration failed! Please try again.";
       
-      setError("Unable to connect to server. Please try again.");
-    } else {
+      if (error.response) {
+        // Server responded with error
+        const serverMessage = error.response.data?.message;
+        if (serverMessage) {
+          errorMessage = serverMessage;
+        }
+        
+        // Specific error messages
+        if (error.response.status === 400) {
+          if (serverMessage?.toLowerCase().includes('email')) {
+            errorMessage = "Email already exists or is invalid";
+          } else if (serverMessage?.toLowerCase().includes('password')) {
+            errorMessage = "Password requirements not met";
+          }
+        }
+        
+        setError(errorMessage);
+      } else if (error.request) {
+        errorMessage = "Unable to connect to server. Please check your connection.";
+        setError(errorMessage);
+      } else {
+        errorMessage = "An unexpected error occurred. Please try again.";
+        setError(errorMessage);
+      }
       
-      setError("Something went wrong, please try again later!");
-    }
+      toast.error(errorMessage, {
+        position: "top-right",
+        autoClose: 3000,
+      });
   } finally {
     setLoading(false);
   }
