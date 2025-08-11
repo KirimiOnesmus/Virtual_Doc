@@ -47,6 +47,8 @@ function App() {
           <Route path="payment" element={<PaymentPage />} />
           <Route path="DoctorRegistration" element={<DoctorRegistration />} />
         </Route>
+
+      </Routes>
         <ToastContainer
           position="top-right"
           autoClose={3000}
@@ -58,7 +60,6 @@ function App() {
           draggable
           pauseOnHover
         />
-      </Routes>
     </div>
   );
 }
