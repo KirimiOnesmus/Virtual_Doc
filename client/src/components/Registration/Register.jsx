@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Doctor from "../../assests/doctor3.png";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { MdHome } from "react-icons/md";
+import {toast} from 'react-toastify'
 
 import api from "../../config/api";
 
@@ -47,16 +48,17 @@ const handleSubmit = async (e) => {
     const response = await api.post("/auth/register", dataToSend);
     
 
-    console.log("User Registered Successfully!!", response.data);
-    
+    // console.log("User Registered Successfully!!", response.data);
+    toast.success("User Registered Successfully! Redirecting....");
    
     setTimeout(() => {
       navigate("/login");
     }, 2000);
     
   } catch (error) {
-    console.log("Registration failed:", error);
-    
+    // console.log("Registration failed:", error);
+
+    toast.error("Registraion Failed ! Try Again Later.");
     if (error.response) {
       
       setError(error.response.data?.message || "Registration Failed!");
